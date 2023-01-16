@@ -1,9 +1,8 @@
 import { type NextPage } from "next";
-import Head from "next/head";
-import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
+import Head from "next/head";
+import Card from "../components/card/card";
 
-import { api } from "../utils/api";
 
 const Home: NextPage = () => {
  const {data: sessionData} = useSession()
@@ -18,6 +17,13 @@ const Home: NextPage = () => {
         {!sessionData &&(
           <button onClick={sessionData? () =>signOut() :() =>signIn('google')} className="rounded-full bg-black/10 px-10 py-3 font-semibold text-black no-underline transition hover:bg-black/20">Sign in with Google</button>
         )}
+          {/* {card} */}
+          {sessionData && (
+            <div className="flex flex-col items-center justify-center">
+              <Card />
+            </div>
+          )}
+
       </div>
     </>
   );
