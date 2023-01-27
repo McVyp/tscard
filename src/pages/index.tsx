@@ -17,6 +17,42 @@ const Home: NextPage = () => {
         {!sessionData &&(
           <button onClick={sessionData? () =>signOut() :() =>signIn('google')} className="rounded-full bg-black/10 px-10 py-3 font-semibold text-black no-underline transition hover:bg-black/20">Sign in with Google</button>
         )}
+        {/* Intro */}
+        <div className="mx-auto max-w-7xl">
+            <h2 className="mb-6 text-left text-3xl font-semibold text-white">Tell us About yourself</h2>
+              <div className="mb-12 grid grid-cols-2 gap-8">
+                  {/* input field 1 */}
+                <div>
+                      <label htmlFor="email" className="block text-sm font-medium text-white">
+                        Title
+                      </label>
+                    <div className=" mt-1 ">
+                      <input
+                        type="text"
+                        name="title"
+                        className="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        placeholder="Software Engineer"
+                      />
+         
+                    </div>
+                </div>
+                {/* input field 2 */}
+                <div>
+                      <label htmlFor="website" className="block text-sm font-medium text-white">
+                        Website
+                      </label>
+                    <div className=" mt-1 ">
+                      <input
+                        type="text"
+                        name="website"
+                        className="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        placeholder="yoursite.com"
+                      />
+         
+                    </div>
+                </div>
+              </div>
+        </div>
           {/* {card} */}
           {sessionData && (
             <div className="flex flex-col items-center justify-center">
