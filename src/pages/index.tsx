@@ -1,11 +1,16 @@
 import { type NextPage } from "next";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
+import { useState } from "react";
 import Card from "../components/card/card";
 
 
 const Home: NextPage = () => {
  const {data: sessionData} = useSession()
+ const [inputs, setInputs] = useState({
+    title:'',
+    website:'',
+ })
   return (
     <>
       <Head>
@@ -28,6 +33,8 @@ const Home: NextPage = () => {
                       </label>
                     <div className=" mt-1 ">
                       <input
+                        value={inputs.title}
+                        onChange={(e)=> setInputs((prev)=> ({...prev, title: e.target.value}))}
                         type="text"
                         name="title"
                         className="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
@@ -43,6 +50,8 @@ const Home: NextPage = () => {
                       </label>
                     <div className=" mt-1 ">
                       <input
+                        value={inputs.website}
+                        onChange= {(e)=>setInputs((prev)=>({...prev, website: e.target.value}))}
                         type="text"
                         name="website"
                         className="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
@@ -56,7 +65,7 @@ const Home: NextPage = () => {
           {/* {card} */}
           {sessionData && (
             <div className="flex flex-col items-center justify-center">
-              <Card />
+              <Card inputs={inputs}/>
             </div>
           )}
 

@@ -1,9 +1,14 @@
 import { useSession } from 'next-auth/react'
 import {FC} from 'react'
 
-interface CardProps {}
+interface CardProps {
+  inputs:{
+    title: string
+    website: string
+  }
+}
 
-const Card: FC<CardProps> = ({}) => {
+const Card: FC<CardProps> = ({inputs}) => {
     const {data: sessionData} = useSession()
 
     return (
