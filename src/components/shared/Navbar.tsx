@@ -11,7 +11,6 @@ function classNames(...classes: string[]) {
 
 const Navbar: FC<NavbarProps> = ({}) => {
   const { data: sessionData } = useSession()
-
   return (
     <Disclosure as='nav' className='h-16 bg-gray-800'>
       {({ open }) => (

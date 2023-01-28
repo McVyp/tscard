@@ -2,7 +2,7 @@ import { type AppType } from "next/app";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 
-import { api } from "../utils/api";
+import { trpc } from '../utils/trpc'
 import '../components/card/card.css';
 import "../styles/globals.css";
 import Navbar from "../components/shared/Navbar";
@@ -19,4 +19,4 @@ const MyApp: AppType<{ session: Session | null }> = ({
   );
 };
 
-export default api.withTRPC(MyApp);
+export default trpc.withTRPC(MyApp);

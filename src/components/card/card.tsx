@@ -1,3 +1,4 @@
+import { BusinessCard } from '@prisma/client'
 import { useSession } from 'next-auth/react'
 import {FC} from 'react'
 
@@ -6,13 +7,32 @@ interface CardProps {
     title: string
     website: string
   }
+  card? : BusinessCard | null | undefined
 }
 
-const Card: FC<CardProps> = ({inputs}) => {
+const Card: FC<CardProps> = ({inputs,card}) => {
     const {data: sessionData} = useSession()
+    const front = card
+    ? 'http://localhost:3000/api/og' +
+      '?username=' +
+      card.name +
+      '&title=' +
+      card.title +
+      '&imgSrc=' +
+      card.imgSrc
+    : inputs &&
+      'http://localhost:3000/api/og' +
+        '?username=' +
+        sessionData?.user?.name +
+        '&title=' +
+        inputs.title +
+        '&imgSrc=' +
+        sessionData?.user?.image
+
+    // const front = inputs && 'http://localhost:3000/api/og' + '?username'+ sessionData?.user?.name + '&titile' +  inputs.title + '&imgSrc' + sessionData?.user?.image
 
     return (
-        <div className='card'>
+      <div className='card'>
       <div className='card-back'>
         <div className='line-numbers'>
           <div>1</div>
@@ -34,14 +54,14 @@ const Card: FC<CardProps> = ({inputs}) => {
             {' '}
             <span className='property'>name</span>
             <span className='operator'>: </span>
-            <span className='string'>Hi</span>
+            <span className='string'>{ card? card.name :sessionData?.user?.name}</span>
             <span>,</span>
           </div>
           <div className='indent'>
             {' '}
             <span className='property'>title</span>
             <span className='operator'>: </span>
-            <span className='string'>ok</span>
+            <span className='string'>{card? card.title:inputs?.title}</span>
             <span>,</span>
           </div>
           <div className='indent'>
@@ -53,13 +73,13 @@ const Card: FC<CardProps> = ({inputs}) => {
               {' '}
               <span className='property'>email</span>
               <span className='operator'>: </span>
-              <span className='string'>haah</span>
+              <span className='string'>{card? card.email:sessionData?.user?.email}</span>
               <span>,</span>
             </div>
             <div className='indent'>
               <span className='property'>website</span>
               <span className='operator'>:</span>
-              <span className='string'>io</span>
+              <span className='string'>{card? card.website:inputs?.website}</span>
             </div>
             <span>{'}'}</span>
           </div>
@@ -67,7 +87,7 @@ const Card: FC<CardProps> = ({inputs}) => {
         </code>
       </div>
       <div className='card-front'>
-        Hello
+        <img className='w-[30rem] h-[15rem]' src={front} alt='' />
       </div>
     </div>
     )

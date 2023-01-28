@@ -1,6 +1,10 @@
 import { ImageResponse } from "@vercel/og";
 import { NextApiRequest, NextApiResponse } from "next";
 
+export const config = {
+    runtime: "experimental-edge"
+  }
+
 const og = async (req: NextApiRequest, res: NextApiResponse)=>{
     // get query from request url
     const url = new URL(req.url!, 'http://localhost:3000')
@@ -8,8 +12,7 @@ const og = async (req: NextApiRequest, res: NextApiResponse)=>{
     const title = url.searchParams.get('title')
     const imgSrc = url.searchParams.get('imgSrc')
 
-    if(!username)
-        return res.status(400).json({error: 'username is required'})
+    // if (!username) return res.status(400).json({ error: 'username is required' })
     return new ImageResponse(
         (
             <div style={{fontFamily:'sans-serif'}} tw='relative w-[30rem] h-[15rem] flex flex-col p-10'>
