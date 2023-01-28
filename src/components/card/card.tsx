@@ -3,7 +3,7 @@ import { useSession } from 'next-auth/react'
 import {FC} from 'react'
 
 interface CardProps {
-  inputs:{
+  inputs?:{
     title: string
     website: string
   }
